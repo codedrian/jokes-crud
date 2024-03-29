@@ -19,6 +19,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		<header>
 			<h1>Jokes List (<?= count($jokes) ?>)</h1>
 		</header>
+		<form action="<?= base_url('JokesController/filter_jokes') ?>" method="post" class="filter-jokes">
+			<input type="radio" id="recent" name="filter" value="recent">
+			<label for="recent">Recent Jokes (added within the last 7 weeks)</label><br>
+			<input type="radio" id="old" name="filter" value="old">
+			<label for="old">Old Jokes (added older than 7 weeks)</label><br>
+			<button type="submit">Apply Filter</button>
+		</form>
+
 		<?php foreach ($jokes as $joke) : ?>
 			<div class='joke-card'>
 				<h2><a href="<?= base_url('JokesController/view_joke' . '/' . $joke['id']) ?>"><?= $joke['title'] ?></a></h2>
