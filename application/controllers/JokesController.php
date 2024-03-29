@@ -39,4 +39,21 @@ class JokesController extends CI_Controller {
 		$data['id'] = $this->db->insert_id();
 		redirect('JokesController/view_joke'.'/' .$data['id']);
 	}
+	public function filter_jokes()
+	{
+		$filter = $this->input->post('filter');
+
+		$this->load->model('JokeModel');
+
+		if ($filter === 'recent') {
+			$data['jokes'] = $this->JokeModel->get_recent_jokes();
+		} elseif ($filter === 'old') {
+			$data['jokes'] = $this->JokeModel->get_old_jokes();
+		} else {
+
+			$data['jokes'] = $this->JokeModel->get_all_jokes();
+		}
+
+		$this->load->view('index', $data);
+	}
 }
