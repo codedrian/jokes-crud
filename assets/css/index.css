@@ -12,6 +12,14 @@ main {
     header {
         text-align: center;
     }
+    .filter-jokes {
+        width: fit-content;
+        margin-left: auto;
+        padding: 0.5rem;
+        button {
+            margin-top: 0.3rem;
+        }
+    }
     .joke-card {
         display: flex;
         text-align: center;
