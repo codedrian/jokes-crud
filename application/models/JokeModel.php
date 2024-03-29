@@ -40,4 +40,26 @@ class JokeModel extends CI_Model
             return null;
         }
     }
+    public function get_recent_jokes()
+    {
+        //fetch recent jokes (added within the last 7 weeks)
+        $sql = "SELECT * FROM jokes WHERE created_at >= DATE_SUB(NOW(), INTERVAL 7 WEEK)";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+
+    public function get_old_jokes()
+    {
+        //fetch old jokes (added older than 7 weeks)
+        $sql = "SELECT * FROM jokes WHERE created_at < DATE_SUB(NOW(), INTERVAL 7 WEEK)";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+
+    public function get_all_jokes()
+    {
+        //fetch all jokes
+        $query = $this->db->get('jokes');
+        return $query->result_array();
+    }
 }
