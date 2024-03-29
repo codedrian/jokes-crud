@@ -12,12 +12,14 @@ main {
     header {
         text-align: center;
     }
-    .joke-card {
+    form {
         display: flex;
-        text-align: center;
-        border-bottom: 0.1rem solid #000;
-        & h2 {
-            margin-right: 1rem;
+        flex-direction: column;
+        #submit-joke-button {
+            margin-top: 5rem;
+            width: 6rem;
+            height: 2rem;
+            margin: 0 auto;
         }
     }
 }

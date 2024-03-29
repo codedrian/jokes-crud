@@ -12,16 +12,21 @@ defined('BASEPATH') or exit('No direct script access allowed');
 </head>
 
 <body>
-	<header>
-		<h1>Jokes List (<?= count($jokes) ?>)</h1>
-	</header>
-	<?php foreach ($jokes as $joke) : ?>
-		<div class='joke-card'>
-			<h2><a href="<?= base_url('JokesController/view_joke'.'/'.$joke['id'])?>"><?= $joke['title'] ?></a></h2>
-			<h2><?= $joke['created_at'] ?></h2>
-		</div>
-	<?php endforeach; ?>
+	<main>
+		<section class="button-container">
+			<button onclick="location.href='<?= base_url('JokesController/add_joke_form'); ?>'">Add new joke</button>
+		</section>
+		<header>
+			<h1>Jokes List (<?= count($jokes) ?>)</h1>
+		</header>
+		<?php foreach ($jokes as $joke) : ?>
+			<div class='joke-card'>
+				<h2><a href="<?= base_url('JokesController/view_joke' . '/' . $joke['id']) ?>"><?= $joke['title'] ?></a></h2>
+				<h2><?= $joke['created_at'] ?></h2>
+			</div>
+		<?php endforeach; ?>
 
+	</main>
 </body>
 
 </html>

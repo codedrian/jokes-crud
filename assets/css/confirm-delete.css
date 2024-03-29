@@ -1,0 +1,10 @@
+h1, .button-container{
+    width: 80%;
+    margin: 3rem auto;
+    text-align: center;
+}
+button {
+    width: 8rem;
+    height: 2rem;
+    margin: 0.6rem;
+}

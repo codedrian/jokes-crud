@@ -9,9 +9,6 @@ main {
         width: fit-content;
         margin-left: auto;
     }
-    header {
-        text-align: center;
-    }
     .joke-card {
         display: flex;
         text-align: center;

@@ -25,4 +25,18 @@ class JokesController extends CI_Controller {
 		$this->JokeModel->delete_joke_by_id($joke_id);
 		redirect('JokesController');
 	}
+	public function add_joke_form() {
+		$this->load->view('add-joke-form');
+	}
+	public function add_joke()
+	{
+		$joke_title = $this->input->post('joke_title');
+		$joke_content = $this->input->post('joke_content');
+		echo $joke_title . $joke_content;
+
+		$this->load->model('JokeModel');
+		$this->JokeModel->add_joke($joke_title, $joke_content);
+		$data['id'] = $this->db->insert_id();
+		redirect('JokesController/view_joke'.'/' .$data['id']);
+	}
 }
