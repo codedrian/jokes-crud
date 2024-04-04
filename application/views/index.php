@@ -12,58 +12,61 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	<link rel="stylesheet" href="<?= base_url('assets/css/index.css'); ?>">
 	<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
 	<script>
-			$(document).ready(function() {
-				// Fetch jokes when the page loads
-				fetchJokes();
+		$(document).ready(function() {
+			// Fetch jokes when the page loads
+			fetchJokes();
 
-				// Handle form submission for filtering jokes
-				$('.filter-jokes').submit(function(e) {
-					// Prevent the default form submission
-					e.preventDefault();
+			// Handle form submission for filtering jokes
+			$('.filter-jokes').submit(function(e) {
+				// Prevent the default form submission
+				e.preventDefault();
 
-					// Serialize form data
-					var formData = $(this).serialize();
+				// Serialize form data
+				var formData = $(this).serialize();
 
-					// Send AJAX request
-					$.post("JokesController/filter_jokes_json", formData, function(response) {
-						// Handle server response
-						console.log(response);
-						if (response.jokes) {
-							// Clear existing jokes
-							$(".jokes-wrapper").empty();
+				// Send AJAX request
+				$.post("JokesController/filter_jokes_json", formData, function(response) {
+					// Handle server response
+					if (response.jokes) {
+						// Clear existing jokes
+						$(".jokes-wrapper").empty();
 
-							// Append filtered jokes to the wrapper
-							response.jokes.forEach(joke => {
-								$(".jokes-wrapper").append(`
+						// Append filtered jokes to the wrapper
+						response.jokes.forEach(joke => {
+							$(".jokes-wrapper").append(`
                             <div class='joke-card'>
                                 <h2><a href="<?= base_url('JokesController/view_joke') ?>/${joke.id}">${joke.title}</a></h2>
                                 <h2>${joke.created_at}</h2>
                             </div>
                         `);
-							});
-						}
-					}, 'json');
-				});
+						});
+					}
+				}, "json");
+				return false;
+			});
 
-				// Function to fetch jokes
-				function fetchJokes() {
-					$.get("JokesController/index_json", function(response) {
-						console.log(response);
-						let jokes = response.jokes;
-						$(".jokes-wrapper").empty();
+			// Function to fetch jokes
+			function fetchJokes() {
+				$.get("JokesController/index_json", function(response) {
+					console.log(response);
+					let jokes = response.jokes;
+					$(".jokes-wrapper").empty();
 
-						// Append jokes to the wrapper
-						jokes.forEach(joke => {
-							$(".jokes-wrapper").append(`
-                        <div class='joke-card'>
+					// Append jokes to the wrapper
+					jokes.forEach(joke => {
+						$(".jokes-wrapper").append(`
+                        <div id="joke-card" class='joke-card'>
                             <h2><a href="<?= base_url('JokesController/view_joke') ?>/${joke.id}">${joke.title}</a></h2>
                             <h2>${joke.created_at}</h2>
                         </div>
                     `);
+						$(".joke-card").each(function() {
+							$(this).addClass("joke-card");
 						});
-					}, "json");
-				}
-			});
+					});
+				}, "json");
+			}
+		});
 	</script>
 </head>
 
