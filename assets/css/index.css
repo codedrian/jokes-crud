@@ -1,6 +1,7 @@
 
 main {
     width: 80%;
+
     margin: 0 auto;
     border: 0.2rem solid #000;
     padding: 1rem;
@@ -20,12 +21,12 @@ main {
             margin-top: 0.3rem;
         }
     }
-    .joke-card {
+   /*  .joke-card {
         display: flex;
         text-align: center;
         border-bottom: 0.1rem solid #000;
         & h2 {
             margin-right: 1rem;
         }
-    }
+    } */
 }

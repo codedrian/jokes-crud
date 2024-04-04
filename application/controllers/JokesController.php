@@ -1,14 +1,21 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+/**
+ * @property $JokeModel
+ */
 class JokesController extends CI_Controller {
+
+
 
 	public function index()
 	{
+		$this->load->view('index');
+	}
+	public function index_json() {
 		$this->load->model('JokeModel');
-
 		$data['jokes'] = $this->JokeModel->get_jokes();
-		$this->load->view('index', $data);
+		echo json_encode($data);
 	}
 	public function view_joke($joke_id) {
 		$this->load->Model('JokeModel');
@@ -39,7 +46,7 @@ class JokesController extends CI_Controller {
 		$data['id'] = $this->db->insert_id();
 		redirect('JokesController/view_joke'.'/' .$data['id']);
 	}
-	public function filter_jokes()
+	public function filter_jokes_json()
 	{
 		$filter = $this->input->post('filter');
 
@@ -50,10 +57,9 @@ class JokesController extends CI_Controller {
 		} elseif ($filter === 'old') {
 			$data['jokes'] = $this->JokeModel->get_old_jokes();
 		} else {
-
 			$data['jokes'] = $this->JokeModel->get_all_jokes();
 		}
 
-		$this->load->view('index', $data);
+		echo json_encode($data);
 	}
 }
